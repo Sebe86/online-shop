@@ -1,0 +1,101 @@
+
+@media (min-device-aspect-ratio: 6/5) {
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .productList {
+    width: 62vw;
+    display: grid;
+    grid-row-gap: 2vw;
+    grid-column-gap: 1vw;
+    grid-template-columns: 20vw 20vw 20vw;
+  }
+
+  .productDetailGrid {
+    outline: none;
+    display: grid;
+    grid-row-gap: 0.5vw;
+    grid-template-rows: 19vw auto;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .product {
+    display: grid;
+    grid-row-gap: .3vw;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+  span {
+    display: block;
+    font-size: 1.2vw;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+
+
+  h2 {
+    margin: 0;
+    font-size: 1.35vw;
+    font-family: 'Ubuntu', sans-serif;
+  }
+}
+
+
+@media (max-device-aspect-ratio: 6/5) {
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .productList {
+    display: grid;
+    grid-row-gap: 12vw;
+    grid-column-gap: 1vw;
+    grid-template-columns: 1fr;
+  }
+
+  .productDetailGrid {
+    outline: none;
+    display: grid;
+    grid-row-gap: 1vw;
+    grid-template-rows: 100vw auto;
+  }
+
+  .product {
+    display: grid;
+    grid-row-gap: .3vw;
+    padding: 0 4vw;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+  span {
+    display: block;
+    font-size: 5vw;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+
+
+  h2 {
+    margin: 0;
+    font-size: 7vw;
+    font-family: 'Ubuntu', sans-serif;
+  }
+}

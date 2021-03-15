@@ -1,0 +1,146 @@
+.container {
+  position: fixed;
+  z-index: 11;
+  width: 100vw;
+  background-color: var(--accent-color-light);
+  border-bottom: .01vw solid var(--accent-color-dark);
+}
+
+
+////// portrait mode //////
+@media (max-device-aspect-ratio: 6/5) {
+  .landscapeNav {
+    display: none;
+  }
+
+  .navPlaceholder {
+    height: 14vw;
+  }
+
+  .portraitNav {
+    width: 92vw;
+    height: 14vw;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+
+  }
+
+  .navLeft {
+    display: grid;
+    justify-items: start;
+  }
+
+  .navRight {
+    display: grid;
+    justify-items: end;
+    grid-column-gap: 6vw;
+    grid-template-columns: auto auto;
+  }
+
+  .navItem {
+    height: 14vw;
+    display: grid;
+    align-items: center;
+    cursor: pointer;
+
+    & svg {
+      width: 6.5vw;
+      height: 6.5vw;
+    }
+  }
+
+  .sideNav {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 19vw 5vw 5vw 5vw;
+    display: grid;
+    grid-row-gap: 5vw;
+    background-color: var(--background-color);
+
+    & .button {
+      height: 14vw;
+
+      & span {
+        font-size: 5vw;
+      }
+    }
+  }
+
+  .sideNavBackground {
+    position: absolute;
+    z-index: 6;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0 , 0.4);
+  }
+}
+
+
+////// landscape mode //////
+@media (min-device-aspect-ratio: 6/5) {
+  .portraitNav {
+    display: none;
+  }
+
+  .sideNav {
+    display: none;
+  }
+
+  .sideNavBackground {
+    display: none;
+  }
+
+  .navPlaceholder {
+    height: 3vw;
+  }
+
+  .landscapeNav {
+    width: 62vw;
+    height: 3vw;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .navLeft {
+    display: grid;
+    grid-template-columns: 10vw 10vw;
+  }
+
+
+  .navRight {
+    display: grid;
+    grid-template-columns: 3vw 3vw;
+    grid-column-gap: 2vw;
+  }
+
+  .navItem {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    height: 3vw;
+    cursor: pointer;
+
+    & span {
+      font-size: 1.3vw;
+    }
+
+    & svg {
+      width: 2vw;
+      height: 2vw;
+    }
+  }
+
+  .activeLink {
+    border-bottom: .25vw solid var(--accent-color-dark);
+    border-radius: .2vw;
+  }
+
+
+}
+
+
+
+

@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="summary" *ngIf="!onlyCartView && cart.cartItems.length > 0">
+    <div class="summaryInfo">
+      <p>{{cart.amountTotal}} Artikel</p>
+      <p> CHF {{cart.priceTotal / 100}}.00</p>
+    </div>
+    <div class="button" routerLink="/shop/checkout">
+      <span>Zur Kasse</span>
+    </div>
+  </div>
+
+  <div class="summary" *ngIf="!onlyCartView && cart.cartItems.length === 0">
+    <p>Der Warenkorb ist leer.</p>
+    <div class="button" routerLink="/shop">
+      <span>Zum Shop</span>
+    </div>
+  </div>
+
+  <div class="cartItem" *ngFor="let cartItem of cart.cartItems">
+    <div class="image">
+      <img src="{{cartItem.image.w450}}" alt="">
+    </div>
+    <div class="item">
+      <div class="itemTitle">
+        <h3>{{cartItem.productName}}</h3>
+        <div class="removeButton" (click)="onRemoveCartItem(cartItem)">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg>
+        </div>
+      </div>
+
+      <div>
+        <span>Grösse: {{cartItem.subVariant}} {{cartItem.variant}}</span>
+      </div>
+
+        <div class="itemCount">
+          <span class="amount">{{cartItem.amountInCart}} Stück</span>
+          <div class="buttonGroup">
+            <div class="amountButton" (click)="onIncreaseAmount(cartItem)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+            </div>
+            <div class="amountButton" (click)="onDecreaseAmount(cartItem)">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+            </div>
+          </div>
+          <span class="price">CHF {{cartItem.amountInCart * cartItem.price / 100}}.00</span>
+        </div>
+
+    </div>
+  </div>
+  <div class="summary" *ngIf="cart.cartItems.length > 4 && !onlyCartView">
+    <div class="summaryInfo">
+      <p>{{cart.amountTotal}} Artikel</p>
+      <p> CHF {{cart.priceTotal / 100}}.00</p>
+    </div>
+    <div class="button" routerLink="/shop/checkout">
+      <span>Zur Kasse</span>
+    </div>
+  </div>
+</div>
+
+

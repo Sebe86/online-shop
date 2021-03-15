@@ -1,0 +1,170 @@
+////// portrait mode //////
+@media (max-device-aspect-ratio: 6/5) {
+  .content {
+    display: grid;
+    grid-row-gap: 8vw;
+    width: 92vw;
+  }
+
+  .formGrid {
+    display: grid;
+    grid-row-gap: 2vw;
+  }
+
+  p {
+    font-size: 4vw;
+    margin: 0;
+    text-align: center;
+  }
+
+  .errorText {
+    color: var(--error-text-color);
+    font-size: 4vw;
+    text-align: center;
+  }
+
+  input {
+    width: 88vw;
+  }
+
+  .passwordInput {
+    display: grid;
+    grid-template-columns: auto auto;
+
+    & input {
+      width: 73vw;
+    }
+
+    & .button {
+      width: 15vw;
+      height: auto;
+      border-left: none;
+
+      & svg {
+        height: 6vw;
+        width: 6vw;
+      }
+    }
+  }
+
+  label {
+    display: block;
+    font-size: 3vw;
+  }
+
+  .buttonGrid {
+    display: grid;
+    grid-row-gap: 3vw;
+    justify-items: stretch;
+  }
+
+
+
+  .button {
+    height: 10vw;
+
+    & span {
+      font-size: 4vw;
+    }
+  }
+
+
+  .inactive {
+    color: #a7a7a7;
+    background-color: #eeeeee;
+  }
+}
+
+////// landscape mode //////
+@media (min-device-aspect-ratio: 6/5) {
+  .content {
+    display: grid;
+    min-height: 50vh;
+    justify-items: center;
+    align-content: center;
+    grid-row-gap: 3.5vw;
+  }
+
+  .formGrid {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 2vw;
+  }
+
+  p {
+    font-size: 1.5vw;
+    margin: 0;
+    text-align: center;
+  }
+
+  .errorText {
+    color: var(--error-text-color);
+    font-size: 1.2vw;
+    text-align: center;
+  }
+
+  input {
+    width: 40vw;
+  }
+
+  .passwordInput {
+    display: grid;
+    grid-template-columns: auto auto;
+
+    & input {
+      width: 35vw;
+    }
+
+    & .button {
+      width: 5vw;
+      height: auto;
+      border-left: none;
+
+      & svg {
+        height: 2vw;
+        width: 2vw;
+      }
+    }
+  }
+
+  label {
+    display: block;
+    font-size: 1.1vw;
+  }
+
+  .buttonGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 2vw;
+    grid-row-gap: 2vw;
+
+  }
+
+  .button {
+    height: 4vw;
+    width: 21vw;
+
+    & span {
+      font-size: 1.2vw;
+    }
+  }
+
+  .twoColumns {
+    grid-column: 1 / 3;
+    width: 44vw;
+  }
+
+
+  .inactive {
+    color: #a7a7a7;
+    background-color: #eeeeee;
+    &:hover {
+      background-color: #eeeeee;
+    }
+    &:active {
+      background-color: #eeeeee;
+    };
+  }
+}
+
+

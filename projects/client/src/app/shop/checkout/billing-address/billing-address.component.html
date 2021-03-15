@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="contentContainer">
+    <form class="address" [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+      <div class="addressLine">
+        <div class="inputNormal">
+          <label for="name">Vorname</label>
+          <input size="12" type="text" id="name" formControlName="name">
+        </div>
+        <div class="inputNormal">
+          <label for="lastName">Nachname</label>
+          <input size="12" type="text" id="lastName" formControlName="lastName">
+        </div>
+      </div>
+
+      <div class="addressLine">
+        <div class="inputLarge">
+          <label for="street">Strasse</label>
+          <input size="12" type="text" id="street" formControlName="street">
+        </div>
+        <div class="inputSmall">
+          <label for="streetNumber">Nummer</label>
+          <input size="8" type="text" id="streetNumber" [size]="5" formControlName="streetNumber">
+        </div>
+      </div>
+
+      <div class="addressLine">
+        <div class="inputSmall">
+          <label for="zip">Postleitzahl</label>
+          <input size="8" type="text" id="zip" [size]="5" formControlName="zip">
+        </div>
+        <div class="inputLarge">
+          <label for="city">Ort</label>
+          <input size="12" type="text" id="city" formControlName="city">
+        </div>
+      </div>
+
+      <form class="address" [formGroup]="emailForm" *ngIf="customer.anonymousUser">
+        <div class="inputFull">
+          <label for="email">E-Mail Adresse</label>
+          <input type="text" id="email" formControlName="email">
+        </div>
+      </form>
+
+    </form>
+  </div>
+
+
+  <div class="controlButtonGrid" *ngIf="customer.anonymousUser">
+    <div class="gridButton cancelButton" (click)="onCancel()" *ngIf="state === 'edit'">
+      <span>Abbrechen</span>
+    </div>
+    <div *ngIf="state === 'new'"></div>
+
+    <div></div>
+
+    <div class="gridButton active" (click)="onSubmit()"
+         *ngIf="(addressForm.status === 'VALID' && emailForm.status === 'VALID') && (addressForm.dirty || emailForm.dirty)">
+      <span>{{state === 'edit' ? 'Speichern' : '' + customer.billingAddress && state === 'new' ? 'Speichern' : 'Weiter'}}</span>
+    </div>
+    <div class="gridButton inactive"
+         *ngIf="(addressForm.status === 'VALID' && emailForm.status === 'VALID') && !(addressForm.dirty || emailForm.dirty) && state === 'edit'">
+      <span>Speichern</span>
+    </div>
+    <div class="gridButton standardButton" (click)="onChangeDataField('shipping')"
+         *ngIf="(addressForm.status === 'VALID' && emailForm.status === 'VALID') && !(addressForm.dirty || emailForm.dirty) && state === 'new'">
+      <span>Weiter</span>
+    </div>
+    <div class="gridButton inactive" *ngIf="addressForm.status !== 'VALID' || emailForm.status !== 'VALID'">
+      <span>{{state === 'edit' ? 'Speichern' : 'Weiter'}}</span>
+    </div>
+  </div>
+
+
+  <div class="controlButtonGrid" *ngIf="!customer.anonymousUser">
+    <div class="gridButton cancelButton" (click)="onCancel()" *ngIf="state === 'edit'">
+      <span>Abbrechen</span>
+    </div>
+    <div *ngIf="state === 'new'"></div>
+
+    <div></div>
+
+    <div class="gridButton active" (click)="onSubmit()" *ngIf="addressForm.status === 'VALID' && addressForm.dirty">
+      <span>{{state === 'edit' ? 'Speichern' : '' + customer.billingAddress && state === 'new' ? 'Speichern' : '' + !customer.billingAddress ? 'Weiter' : ''}}</span>
+    </div>
+    <div class="gridButton inactive" *ngIf="addressForm.status === 'VALID' && !addressForm.dirty && state === 'edit'">
+      <span>Speichern</span>
+    </div>
+    <div class="gridButton standardButton" (click)="onChangeDataField('shipping')" *ngIf="addressForm.status === 'VALID' && !addressForm.dirty && state === 'new'">
+      <span>Weiter</span>
+    </div>
+    <div class="gridButton inactive" *ngIf="addressForm.status !== 'VALID'">
+      <span>{{state === 'edit' ? 'Speichern' : 'Weiter'}}</span>
+    </div>
+  </div>
+</div>
+

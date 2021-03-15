@@ -1,0 +1,255 @@
+
+
+@media (min-device-aspect-ratio: 6/5) {
+  :host {
+    display: block;
+  }
+
+  .container {
+    display: grid;
+    height: 32vw;
+    grid-template-rows: 1fr auto;
+    grid-row-gap: 2vw;
+  }
+
+  .contentContainer {
+    display: grid;
+    align-items: center;
+  }
+
+
+  input {
+    font-family: 'Open Sans', sans-serif;
+    border: .01vw solid #a7a7a7;
+    font-size: 1.1vw;
+    padding: 1vw 2vw;
+
+    &:focus {
+      outline: none;
+      border: .1vw solid #a7a7a7;
+      padding: .9vw 1.9vw;
+    }
+  }
+
+
+  label {
+    font-family: 'Open Sans', sans-serif;
+    display: block;
+    font-size: 1vw;
+  }
+
+
+  .address {
+    width: 48vw;
+    height: auto;
+    display: grid;
+    grid-row-gap: 1vw;
+  }
+
+  .addressLine {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 1vw;
+  }
+
+
+  .inputSmall {
+    display: grid;
+    width: 10.5vw;
+  }
+
+  .inputNormal {
+    display: grid;
+    width: 23.5vw;
+
+  }
+
+  .inputLarge {
+    display: grid;
+    width: 36.5vw;
+  }
+
+  .inputFull {
+    display: grid;
+    width: 48vw;
+  }
+
+  .controlButtonGrid {
+    width: 48vw;
+    height: 4vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    & .gridButton {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      border: .01vw solid #b7b7b7;
+
+      & span {
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 1.2vw;
+      }
+    }
+
+    & .buttonRight {
+      grid-column: 3 / 4;
+    }
+  }
+
+  .inactive {
+    color: #a7a7a7;
+    background-color: #eeeeee;
+    &:hover {
+      background-color: #eeeeee;
+    }
+    &:active {
+      background-color: #eeeeee;
+    };
+  }
+
+  .active {
+    color: black;
+    background-color: #bbddbb;
+    &:hover {
+      background-color: #bbeebb;
+    }
+    &:active {
+      background-color: #bbddbb;
+    };
+  }
+
+  .cancelButton {
+    background-color: #ddbbbb;
+
+    &:hover {
+      background-color: #eebbbb;
+    }
+
+    &:active {
+      background-color: #ddbbbb;
+    };
+  }
+
+  .standardButton {
+    background-color: #e0e0e0;
+
+    &:hover {
+      background-color: #e9e9e9;
+    }
+
+    &:active {
+      background-color: #e0e0e0;
+    };
+  }
+}
+
+
+@media (max-device-aspect-ratio: 6/5) {
+  :host {
+    display: block;
+  }
+
+  .container {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-row-gap: 8vw;
+  }
+
+  .contentContainer {
+    display: grid;
+    min-height: 60vw;
+    align-items: center;
+  }
+
+
+  input {
+    font-family: 'Open Sans', sans-serif;
+    border: .01vw solid #a7a7a7;
+    font-size: 4vw;
+    padding: 3vw 2vw;
+  }
+
+
+  label {
+    font-family: 'Open Sans', sans-serif;
+    display: block;
+    font-size: 3vw;
+  }
+
+
+  .address {
+    height: auto;
+    display: grid;
+    grid-row-gap: 1vw;
+  }
+
+  .addressLine {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 1vw;
+  }
+
+
+  .inputSmall {
+    display: grid;
+    width: 30vw;
+  }
+
+  .inputNormal {
+    display: grid;
+    width: 45vw;
+
+  }
+
+  .inputLarge {
+    display: grid;
+    width: 60vw;
+  }
+
+  .inputFull {
+    display: grid;
+    width: 92vw;
+  }
+
+  .controlButtonGrid {
+    height: 12vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    & .gridButton {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      border: .01vw solid #b7b7b7;
+
+      & span {
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 3.5vw;
+      }
+    }
+    & .buttonRight {
+      grid-column: 3 / 4;
+    }
+  }
+
+  .inactive {
+    color: #a7a7a7;
+    background-color: #eeeeee;
+  }
+
+  .active {
+    color: black;
+    background-color: #bbddbb;
+  }
+
+  .cancelButton {
+    background-color: #ddbbbb;
+
+  }
+
+  .standardButton {
+    background-color: #e0e0e0;
+
+  }
+}

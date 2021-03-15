@@ -1,0 +1,121 @@
+<div class="container">
+  <div class="checkoutContainer" *ngIf="state !== 'loading'">
+    <div class="customerDataContainer" *ngIf="state === 'show' && stateCart === 'show'">
+      <div class="customerDataGrid">
+        <div class="customerData hideInPortrait">
+          <h3>Rechnungsadresse</h3>
+          <div class="address" *ngIf="checkoutState.customer.billingAddress">
+            <p>{{checkoutState.customer.billingAddress.name}} {{checkoutState.customer.billingAddress.lastName}}</p>
+            <p>{{checkoutState.customer.billingAddress.street}} {{checkoutState.customer.billingAddress.streetNumber}}</p>
+            <p>{{checkoutState.customer.billingAddress.zip}} {{checkoutState.customer.billingAddress.city}}</p>
+            <p *ngIf="checkoutState.customer.anonymousUser">{{checkoutState.customer.emailAddress}}</p>
+          </div>
+        </div>
+
+        <div class="customerData">
+          <h3>Lieferadresse</h3>
+          <div class="address" *ngIf="checkoutState.customer.shippingAddress">
+            <p>{{checkoutState.customer.shippingAddress.name}} {{checkoutState.customer.shippingAddress.lastName}}</p>
+            <p>{{checkoutState.customer.shippingAddress.street}} {{checkoutState.customer.shippingAddress.streetNumber}}</p>
+            <p>{{checkoutState.customer.shippingAddress.zip}} {{checkoutState.customer.shippingAddress.city}}</p>
+            <p></p>
+          </div>
+        </div>
+
+       <!--  <div class="customerData">
+          <h3>Zahlungsmethode</h3>
+          <div class="address" *ngIf="checkoutState.customer.source">
+            <p>**** **** **** {{checkoutState.customer.source.card.last4}}</p>
+            <p>Kartentyp: {{checkoutState.customer.source.card.brand}}</p>
+            <p>Ablaufdatum: {{checkoutState.customer.source.card.exp_month}}/{{checkoutState.customer.source.card.exp_year}}</p>
+          </div>
+        </div> -->
+
+        <div class="customerEditButton">
+          <div class="editButton" (click)="onEdit('customer')">
+            <span>Bearbeiten</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dataEditContainer" *ngIf="state === 'new' || state === 'edit'">
+      <div class="dataEditNav">
+        <div class="editNavItem" [ngClass]="checkButtonState('billing')" (click)="onChangeDataField('billing')">
+          <span>Rechnungsadresse</span>
+        </div>
+
+        <div class="editNavItem inactive" *ngIf="!customer.billingAddress">
+          <span>Lieferadresse</span>
+        </div>
+        <div class="editNavItem" *ngIf="customer.billingAddress" [ngClass]="checkButtonState('shipping')" (click)="onChangeDataField('shipping')">
+          <span>Lieferadresse</span>
+        </div>
+
+        <div class="editNavItem inactive" *ngIf="!customer.shippingAddress">
+          <span>Zahlungsmethode</span>
+        </div>
+        <div class="editNavItem" *ngIf="customer.shippingAddress" [ngClass]="checkButtonState('payment')" (click)="onChangeDataField('payment')">
+          <span>Zahlungsmethode</span>
+        </div>
+      </div>
+      <app-billing-address *ngIf="checkoutState.selectedDataField === 'billing'"></app-billing-address>
+      <app-shipping-address *ngIf="checkoutState.selectedDataField === 'shipping'"></app-shipping-address>
+      <app-payment *ngIf="checkoutState.selectedDataField === 'payment'"></app-payment>
+    </div>
+
+
+    <div class="cartContainer" *ngIf="stateCart === 'edit'">
+      <app-checkout-cart></app-checkout-cart>
+    </div>
+
+    <div class="cartSummaryContainer" *ngIf="state === 'show' && stateCart === 'show'">
+      <div class="cartSummary">
+        <div class="summaryHeader">
+          <span>Produkt</span>
+          <span class="justifyRight">Preis</span>
+          <span class="justifyRight">Anzahl</span>
+          <span class="justifyRight">Total</span>
+        </div>
+        <div class="line"></div>
+        <div class="cartItem" *ngFor="let cartItem of checkoutState.cart.cartItems">
+          <span class="productTitle">{{cartItem.productName}}</span>
+          <span class="size">Grösse: {{cartItem.subVariant}} {{cartItem.variant}}</span>
+          <span class="justifyRight">CHF {{cartItem.price / 100}}.00</span>
+          <span class="justifyRight">{{cartItem.amountInCart}} Stück</span>
+          <span class="justifyRight">CHF {{cartItem.amountInCart * cartItem.price / 100}}.00</span>
+        </div>
+        <div class="totalLine"></div>
+        <div class="summaryTotal">
+          <span class="justifyRight">Subtotal</span>
+          <span class="justifyRight">CHF {{checkoutState.cart.priceTotal / 100}}.00</span>
+          <span class="justifyRight">Versandkosten</span>
+          <span class="justifyRight">CHF 9.00</span>
+          <span class="justifyRight total">Total</span>
+          <span class="justifyRight total">CHF {{checkoutState.cart.priceTotal / 100 + 9}}.00</span>
+        </div>
+      </div>
+      <div class="cartEditButton">
+        <div class="editButton" (click)="onEdit('cart')">
+          <span>Bearbeiten</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orderButtonContainer" *ngIf="state === 'show' && stateCart === 'show'">
+      <p routerLink="/agb" id="link">Mit der Bestellung akzeptierst du unsere <strong>Allgemeinen Geschäftsbedingungen</strong>.</p>
+      <div class="orderButton" (click)="onOrder()">
+        <h3>Bestellen</h3>
+      </div>
+    </div>
+  </div>
+
+<!--   <div class="loadingContainer" *ngIf="state === 'loading'">
+    <app-loading-spinner></app-loading-spinner>
+  </div> -->
+</div>
+
+
+
+
+

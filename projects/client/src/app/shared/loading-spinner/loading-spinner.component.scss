@@ -1,0 +1,52 @@
+:host {
+  display: block;
+}
+
+
+#spinner {
+  animation-name: rotate;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.container {
+  height: 60vh;
+}
+
+@media (min-device-aspect-ratio: 6/5) {
+  svg {
+    width: 5vw;
+    height: 5vw;
+    justify-self: center;
+
+    & path {
+      fill: var(--accent-color-dark);
+    }
+
+    & h4 {
+      font-size: 1.5vw;
+    }
+  }
+}
+
+@media (max-device-aspect-ratio: 6/5) {
+  svg {
+    width: 15vw;
+    height: 15vw;
+    justify-self: center;
+
+    & h4 {
+      font-size: 5vw;
+    }
+  }
+}

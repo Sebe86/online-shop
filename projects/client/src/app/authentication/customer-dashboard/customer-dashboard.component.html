@@ -1,0 +1,37 @@
+<div class="container">
+
+  <div class="buttonGrid" *ngIf="!reauthenticate && !isLoading">
+    <div class="bigButton" (click)="onLogout()">
+      <span>Abmelden</span>
+    </div>
+    <div class="bigButton" (click)="onDeleteAccount()">
+      <span>Konto löschen</span>
+    </div>
+  </div>
+
+  <div class="content" *ngIf="reauthenticate && !isLoading">
+    <p>Der Account wird unwiderruflich gelöscht. Bitte mit Passwort bestätigen.</p>
+    <p *ngIf="!wrongPassword"></p>
+    <p *ngIf="wrongPassword" style="color: #ff9999">Passwort nicht korrekt!</p>
+    <form class="passwordGrid" [formGroup]="passwordForm">
+      <div class="passwordInput">
+        <label for="password">Passwort</label>
+        <input type="password" id="password" formControlName="password">
+      </div>
+      <div class="button" (click)="deleteAccount()" [ngClass]="(passwordForm.status === 'INVALID' ? 'inactive' : 'active')">
+        <span>Löschen</span>
+      </div>
+      <div class="button" (click)="reauthenticate = false; wrongPassword = false">
+        <span>Abbrechen</span>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
+
+</div>
+
+

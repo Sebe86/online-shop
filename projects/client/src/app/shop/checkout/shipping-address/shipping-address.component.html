@@ -1,0 +1,89 @@
+
+<div class="container">
+  <div class="contentContainer">
+    <div class="selectButtonGrid">
+      <div class="selectButton" [ngClass]="(differentShippingAddress ? 'unselected' : 'selected')" (click)="differentShippingAddress = false">
+        <span>Rechnungsadresse verwenden</span>
+      </div>
+      <div class="selectButton" [ngClass]="(differentShippingAddress ? 'selected' : 'unselected')" (click)="differentShippingAddress = true">
+        <span>Abweichende Lieferadresse</span>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="billingAddressContainer" *ngIf="!differentShippingAddress">
+        <div class="billingAddress" *ngIf="customer.billingAddress">
+          <p>{{customer.billingAddress.name}} {{customer.billingAddress.lastName}}</p>
+          <p>{{customer.billingAddress.street}} {{customer.billingAddress.streetNumber}}</p>
+          <p>{{customer.billingAddress.zip}} {{customer.billingAddress.city}}</p>
+        </div>
+      </div>
+
+
+      <form class="address" [formGroup]="addressForm" *ngIf="differentShippingAddress">
+        <div class="addressLine">
+          <div class="inputNormal">
+            <label for="name">Vorname</label>
+            <input size="12" type="text" id="name" formControlName="name">
+          </div>
+          <div class="inputNormal">
+            <label for="lastName">Nachname</label>
+            <input size="12" type="text" id="lastName" formControlName="lastName">
+          </div>
+        </div>
+
+        <div class="addressLine">
+          <div class="inputLarge">
+            <label for="street">Strasse</label>
+            <input size="12" type="text" id="street" formControlName="street">
+          </div>
+          <div class="inputSmall">
+            <label for="streetNumber">Nummer</label>
+            <input size="8" type="text" id="streetNumber" [size]="5" formControlName="streetNumber">
+          </div>
+        </div>
+
+        <div class="addressLine">
+          <div class="inputSmall">
+            <label for="zip">Postleitzahl</label>
+            <input size="8" type="text" id="zip" [size]="5" formControlName="zip">
+          </div>
+          <div class="inputLarge">
+            <label for="city">Ort</label>
+            <input size="12" type="text" id="city" formControlName="city">
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+
+  <div class="controlButtonGrid">
+
+    <div class="gridButton standardButton" (click)="onChangeDataField('billing')" *ngIf="state === 'new'">
+      <span>Zurück</span>
+    </div>
+    <div class="gridButton cancelButton" (click)="onCancel()" *ngIf="state === 'edit'">
+      <span>Abbrechen</span>
+    </div>
+
+    <div></div>
+
+    <div class="gridButton active" (click)="onSubmit()" *ngIf="checkIfChangedAndValid()">
+      <span>{{state === 'edit' ? 'Speichern' : '' + customer.shippingAddress && state === 'new' ? 'Speichern' : 'Weiter'}}</span>
+    </div>
+    <div class="gridButton standardButton" (click)="onChangeDataField('payment')" *ngIf="customer.differentShippingAddress && customer.differentShippingAddress === differentShippingAddress && state === 'new'">
+      <span>Weiter</span>
+    </div>
+    <div class="gridButton inactive" *ngIf="customer.differentShippingAddress === differentShippingAddress && state === 'edit' && !addressForm.dirty">
+      <span>Speichern</span>
+    </div>
+    <div class="gridButton inactive" *ngIf="!checkIfChangedAndValid() && customer.differentShippingAddress !== differentShippingAddress">
+      <span>{{state === 'edit' ? 'Speichern' : '' + customer.shippingAddress && state === 'new' ? 'Speichern' : 'Weiter'}}</span>
+    </div>
+  </div>
+
+</div>
+

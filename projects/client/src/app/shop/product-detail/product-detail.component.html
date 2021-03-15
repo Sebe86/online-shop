@@ -1,0 +1,324 @@
+<div class="container">
+  <div class="productDetailGrid" *ngIf="!isLoading">
+    <div class="productDetailImages">
+      <div class="imageGrid">
+        <div class="previewImageGrid">
+          <div class="imagePreview" *ngIf="product.images[0]" (click)="selectedImage = 0">
+            <img src="{{product.images[0].w300}}" alt="">
+          </div>
+          <div class="imagePreview" *ngIf="product.images[1]" (click)="selectedImage = 1">
+            <img src="{{product.images[1].w300}}" alt="">
+          </div>
+          <div class="imagePreview" *ngIf="product.images[2]" (click)="selectedImage = 2">
+            <img src="{{product.images[2].w300}}" alt="">
+          </div>
+        </div>
+        <div class="image">
+          <img src="{{product.images[selectedImage].w900}}" alt="{{product.productName}}">
+        </div>
+      </div>
+    </div>
+
+    <div class="chooseSizeContainer">
+      <div class="chooseSizeGrid">
+        <div class="text">
+          <h2>{{product.productName}}</h2>
+          <span class="price">CHF {{product.price / 100}}.00</span>
+        </div>
+
+
+        <div class="chooseSize">
+          <div class="buttonGrid">
+            <div class="chooseSizeButton buttonNormal" (click)="selectSubVariantOpen = true" [ngClass]="{'chosenColorGreen' : selectedSubVariant}">
+              <span *ngIf="!selectedSubVariant">Wähle Grösse</span>
+              <span *ngIf="selectedSubVariant">Grösse: {{selectedSubVariant}}</span>
+            </div>
+
+            <div class="chooseSizeButton buttonNormal" (click)="selectVariantOpen = true" [ngClass]="{'chosenColorGreen' : selectedVariant}">
+              <span *ngIf="!selectedVariant">Wähle Hemdlänge</span>
+              <span *ngIf="selectedVariant">Hemdlänge: {{selectedVariant}}cm</span>
+            </div>
+          </div>
+
+          <div class="chooseSizePanel" *ngIf="selectSubVariantOpen || selectVariantOpen">
+            <div *ngIf="selectSubVariantOpen">
+              <div class="gridTitle">
+                <span>Wähle Grösse</span>
+              </div>
+              <div class="subVariantGrid" >
+                <div class="subVariantGridItem buttonNormal"
+                     *ngFor="let subVariant of subVariantsArray"
+                     [ngClass]="{'chosenColorGreen' : selectedSubVariant === subVariant}"
+                     (click)="onSelectSubVariant(subVariant)">
+                  <span>{{subVariant}}</span>
+                </div>
+                <div class="subVariantClose buttonColorRed" (click)="onCloseDropdown()">
+                  <span>Schliessen</span>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="selectVariantOpen">
+              <div class="gridTitle">
+                <span>Wähle Hemdlänge in cm</span>
+              </div>
+              <div class="variantGrid" >
+                <div class="variantGridItem buttonNormal"
+                     *ngFor="let variant of variantsArray"
+                     [ngClass]="{'chosenColorGreen' : selectedVariant === variant}"
+                     (click)="onSelectVariant(variant)">
+                  <span>{{variant}}cm</span>
+                </div>
+                <div class="variantClose buttonColorRed" (click)="onCloseDropdown()">
+                  <span>Schliessen</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="placeHolderInStock" *ngIf="!selectedInventoryItem"></div>
+        <div class="inStock" *ngIf="selectedInventoryItem && !selectedCartItem">
+          <span *ngIf="selectedInventoryItem.amount > 5">mehr als <b>5</b> Stück an Lager</span>
+          <span *ngIf="selectedInventoryItem.amount <= 5 && selectedInventoryItem.amount > 0">noch <b>{{selectedInventoryItem.amount}}</b> Stück an Lager</span>
+          <span *ngIf="selectedInventoryItem.amount === 0"><b>Ausverkauft</b></span>
+        </div>
+        <div class="inStock" *ngIf="selectedCartItem">
+          <span *ngIf="selectedInventoryItem.amount - selectedCartItem.amountInCart > 5">mehr als <b>5</b> Stück an Lager</span>
+          <span *ngIf="selectedInventoryItem.amount - selectedCartItem.amountInCart <= 5">noch <b>{{selectedInventoryItem.amount - selectedCartItem.amountInCart}}</b> Stück an Lager</span>
+        </div>
+
+
+        <div class="buttonNormal addToCartButton" (click)="onAddToCart()"
+             [ngClass]="!selectedVariant || !selectedSubVariant || selectedInventoryItem.amount === 0 ? 'buttonDisabled' : 'buttonColorNormal'" *ngIf="!selectedCartItem">
+          <span>In den Warenkorb</span>
+        </div>
+        <div class="cartInfo" *ngIf="selectedCartItem">
+
+          <div class="amountInCartGrid">
+            <span>Im Warenkorb: </span>
+            <span>{{selectedCartItem.amountInCart}} Stück</span>
+            <div class="amountButton" (click)="onIncreaseAmount()">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+            </div>
+            <div class="amountButton" (click)="onDecreaseAmount()">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="productInfoContainer" *ngIf="!isLoading">
+    <div class="productInfoNav">
+      <div class="navItem buttonNormal" (click)="onSelectNavItem('info')" [ngClass]="selectedNavItem === 'info' ? 'chosenColorNormal' : 'buttonColorNormal'">
+        <span>Information</span>
+      </div>
+      <div class="navItem buttonNormal" (click)="onSelectNavItem('guide')" [ngClass]="selectedNavItem === 'guide' ? 'chosenColorNormal' : 'buttonColorNormal'">
+        <span>Beratung</span>
+      </div>
+      <div class="navItem buttonNormal" (click)="onSelectNavItem('table')" [ngClass]="selectedNavItem === 'table' ? 'chosenColorNormal' : 'buttonColorNormal'">
+        <span>Masstabelle</span>
+      </div>
+    </div>
+
+
+    <div class="info" *ngIf="selectedNavItem === 'info'">
+      <div>
+        <h3>Beschreibung</h3>
+        <p>Figur betontes Hemd aus hochwertigem Baumwoll Stretch</p>
+      </div>
+
+      <div>
+        <h3>Material</h3>
+        <p>97% Baumwolle<br>3% Elastan</p>
+      </div>
+
+      <div>
+        <h3>Waschanleitung</h3>
+        <p>Mit 30°C in der Maschine waschen.<br>Nicht in den Trockner geben.<br>Mit ähnlichen Farben waschen.</p>
+      </div>
+    </div>
+
+    <div class="guide" *ngIf="selectedNavItem === 'guide'">
+      <div class="guideItem">
+        <h3>Grössen von Rippd Clothing</h3>
+        <p>
+          Mit unserem Masssystem bestimmst du zuerst deine Grösse und wählst anschliessend eine passende Hemdlänge aus.
+          Unsere Grössen orientieren sich nicht an der Kragenweite, sondern am Brustumfang.
+          Der Kragen ist dehnbar und passt sich deinem Hals an.
+          <br>
+          <br>
+          Auf dieser Seite sind die wichtigsten Informationen zusammengefasst. Solltest du noch Fragen haben kannst du uns gerne kontaktieren.
+        </p>
+      </div>
+
+      <div class="guideItem">
+        <h3>Tipps fürs Messen</h3>
+        <p>
+          Falls gerade niemand bei dir ist, der dir beim Messen hilft. Kannst du auch die Masse von einem alten Hemd nehmen,
+          bei dem du mit dem Brustumfang und der Länge zufrieden bist.
+          <br>
+          <br>
+          Wir empfehlen dir bei der ersten Bestellung verschiedene Grössen zu bestellen. Damit du dein perfektes Hemd findest.
+        </p>
+      </div>
+
+      <div class="guideItem">
+        <h3>Brustumfang messen</h3>
+        <p>
+          Den Brustumfang misst du unterhalb der Achseln an der breitesten Stelle der Brust.
+          Das Massband sollte nicht verdreht sein und in einer horizontalen Linie um den Brustkorb gehen.
+          Achte auf eine gerade und entspannte Körperhaltung.
+          <br>
+          <br>
+          Wir empfehlen dir zu dem gemessenen Brustumfang 2cm hinzuzurechnen. Nun kannst du in der Masstabelle
+          deine Grösse heraussuchen. Zum Beispiel bei einen Brustumfang von 112cm ergibt sich die Grösse 58V.
+        </p>
+      </div>
+
+      <div class="guideItem">
+        <h3>Hemdlänge messen</h3>
+        <p>
+          Die Hemdlänge wird vom Kragenansatz bis zum Hemdsaum gemessen.
+          Die optimale Hemdlänge geht vom 7. Halswirbel bis zur Mitte des Gesäss.
+          Den 7. Halswirbel findest du, indem du den Kopf nach vorne
+          beugst und den hervor stehenden Knochen ertastest.
+          Falls du das Hemd in der Hose trägst kann es auch länger sein, damit es gut in der Hose hält.
+          <br>
+          <br>
+          Die verschiedenen Hemdlängen haben auch unterschiedliche Ärmellängen. Genaue Angaben findest du in der Masstabelle.
+        </p>
+      </div>
+
+      <div class="guideItem" id="chestImage">
+        <img src="https://firebasestorage.googleapis.com/v0/b/rippd-admin.appspot.com/o/Masse%2Fbrustumfang%40600px.jpg?alt=media&token=4405da05-2334-463d-8961-e9a6e4fef358" alt="">
+      </div>
+
+      <div class="guideItem">
+        <img src="https://firebasestorage.googleapis.com/v0/b/rippd-admin.appspot.com/o/Masse%2Fhemdl%C3%A4nge%40600px.jpg?alt=media&token=248939bd-28ab-461f-aa7f-c1b4dbe0b254" alt="">
+      </div>
+
+    </div>
+
+
+    <div class="tableLandscape" *ngIf="selectedNavItem === 'table'">
+      <div class="measurementTable">
+        <table>
+          <tr class="tableHeader">
+            <th class="textLeft"></th><th>52V</th><th>54V</th><th>56V</th><th>58V</th><th>60V</th><th>62V</th><th>64V</th><th>66V</th><th>68V</th><th>70V</th><th>72V</th>
+          </tr>
+          <tr>
+            <th class="textLeft">Brustumfang</th><td>100</td><td>104</td><td>108</td><td>112</td><td>116</td><td>120</td><td>124</td><td>128</td><td>132</td><td>136</td><td>140</td>
+          </tr>
+          <tr class="rowColor">
+            <th class="textLeft">Taillenumfang</th><td>83</td><td>86.5</td><td>90</td><td>93</td><td>96.5</td><td>100</td><td>103</td><td>106.5</td><td>110</td><td>113</td><td>116.5</td>
+          </tr>
+          <tr>
+            <th class="textLeft">Halsumfang</th><td>38</td><td>39</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>44.5</td><td>45</td><td>45.5</td><td>46</td>
+          </tr>
+        </table>
+        <p>Alle Masse in cm</p>
+      </div>
+
+      <div class="measurementTable">
+        <table>
+          <tr class="tableHeader">
+            <th class="textLeft"></th><th>**V 75</th><th>**V 80</th><th>**V 85</th>
+          </tr>
+          <tr>
+            <th class="textLeft">Hemdlänge</th><td>75</td><td>80</td><td>85</td>
+          </tr>
+          <tr class="rowColor">
+            <th class="textLeft">Ärmellänge mit Manschette</th><td>63</td><td>65</td><td>67</td>
+          </tr>
+        </table>
+        <p>Alle Masse in cm</p>
+      </div>
+    </div>
+
+    <div class="tablePortrait" *ngIf="selectedNavItem === 'table'">
+      <h3>Masstabelle Grösse</h3>
+      <div class="measurementTable">
+      <table>
+        <tr class="tableHeader">
+          <th class="textLeft"></th><th>52V</th><th>54V</th><th>56V</th><th>58V</th>
+        </tr>
+        <tr>
+          <th class="textLeft">Brust</th><td>100</td><td>104</td><td>108</td><td>112</td>
+        </tr>
+        <tr class="rowColor">
+          <th class="textLeft">Taille</th><td>83</td><td>86.5</td><td>90</td><td>93</td>
+        </tr>
+        <tr>
+          <th class="textLeft">Hals</th><td>38</td><td>39</td><td>40</td><td>41</td>
+        </tr>
+      </table>
+      <p>Alle Masse in cm</p>
+    </div>
+
+    <div class="measurementTable">
+      <table>
+        <tr class="tableHeader">
+          <th class="textLeft"></th><th>60V</th><th>62V</th><th>64V</th><th>66V</th>
+        </tr>
+        <tr>
+          <th class="textLeft">Brust</th><td>116</td><td>120</td><td>124</td><td>128</td>
+        </tr>
+        <tr class="rowColor">
+          <th class="textLeft">Taille</th><td>96.5</td><td>100</td><td>103</td><td>106.5</td>
+        </tr>
+        <tr>
+          <th class="textLeft">Hals</th><td>42</td><td>43</td><td>44</td><td>44.5</td>
+        </tr>
+      </table>
+      <p>Alle Masse in cm</p>
+    </div>
+
+    <div class="measurementTable">
+      <table>
+        <tr class="tableHeader">
+          <th class="textLeft"></th><th>68V</th><th>70V</th><th>72V</th>
+        </tr>
+        <tr>
+          <th class="textLeft">Brust</th><td>132</td><td>136</td><td>140</td>
+        </tr>
+        <tr class="rowColor">
+          <th class="textLeft">Taille</th><td>110</td><td>113</td><td>116.5</td>
+        </tr>
+        <tr>
+          <th class="textLeft">Hals</th><td>45</td><td>45.5</td><td>46</td>
+        </tr>
+      </table>
+      <p>Alle Masse in cm</p>
+    </div>
+
+      <h3>Masstabelle Hemdlänge</h3>
+    <div class="measurementTable">
+      <table>
+        <tr class="tableHeader">
+          <th class="textLeft"></th><th>**V 75</th><th>**V 80</th><th>**V 85</th>
+        </tr>
+        <tr>
+          <th class="textLeft">Hemdlänge</th><td>75</td><td>80</td><td>85</td>
+        </tr>
+        <tr class="rowColor">
+          <th class="textLeft">Ärmellänge mit Manschette</th><td>63</td><td>65</td><td>67</td>
+        </tr>
+      </table>
+      <p>Alle Masse in cm</p>
+    </div>
+    </div>
+
+
+
+  </div>
+
+  <div *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</div>
+

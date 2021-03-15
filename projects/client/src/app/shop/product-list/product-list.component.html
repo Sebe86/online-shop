@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="productList">
+    <div class="productDetailGrid" *ngFor="let product of products" (click)="onSelectProduct(product.productId)">
+      
+      <img src="{{product.images[0].w600}}" alt="{{product.productName}}">
+
+      <div class="product">
+        <h2>{{product.productName}}</h2>
+        <span>CHF {{product.price / 100}}.00</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

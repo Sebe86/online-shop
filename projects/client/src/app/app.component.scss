@@ -1,0 +1,23 @@
+
+
+
+@media (min-device-aspect-ratio: 6/5) {
+  .container {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+    grid-row-gap: 4vw;
+  }
+}
+
+@media (max-device-aspect-ratio: 6/5) {
+  .container {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+    grid-row-gap: 10vw;
+  }
+}
+
+
+

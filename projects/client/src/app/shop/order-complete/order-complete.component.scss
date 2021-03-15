@@ -1,0 +1,112 @@
+
+
+
+
+@media (min-device-aspect-ratio: 6/5) {
+  h1 {
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.4vw;
+    text-align: center;
+  }
+
+  p {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    word-break: break-all;
+  }
+
+  span {
+    font-family: 'Open Sans', sans-serif;
+    pointer-events: none;
+  }
+
+  .justifyRight {
+    justify-self: end;
+  }
+
+
+
+  .container {
+    display: grid;
+    grid-row-gap: 1vw;
+    justify-items: center;
+    align-items: center;
+    padding-top: 2vw;
+  }
+
+
+  .controlButtonGrid {
+    width: 20vw;
+    height: 4vw;
+    display: grid;
+    grid-template-columns: 1fr;
+
+    & .gridButton {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      border: .01vw solid #b7b7b7;
+
+      & span {
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 1.2vw;
+      }
+    }
+  }
+}
+
+@media (max-device-aspect-ratio: 6/5) {
+  .container {
+    display: grid;
+    grid-row-gap: 4vw;
+    justify-items: center;
+    align-items: center;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 5vw;
+    text-align: center;
+  }
+
+  p {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    word-break: break-all;
+    font-size: 3.5vw;
+  }
+
+  span {
+    font-family: 'Open Sans', sans-serif;
+    pointer-events: none;
+  }
+
+  .justifyRight {
+    justify-self: end;
+  }
+
+
+
+
+
+  .controlButtonGrid {
+    width: 40vw;
+    height: 12vw;
+    display: grid;
+    grid-template-columns: 1fr;
+
+    & .gridButton {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      border: .01vw solid #b7b7b7;
+
+      & span {
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 4vw;
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="summary">
+    <div class="summaryInfo">
+      <p>{{cart.amountTotal}} Artikel</p>
+      <p> CHF {{cart.priceTotal / 100}}.00</p>
+    </div>
+    <div class="button" (click)="closeCartEdit()">
+      <span>Zurück</span>
+    </div>
+  </div>
+
+  <app-cart [onlyCartView]="true"></app-cart>
+
+  <div class="summary" *ngIf="cart.cartItems.length > 4">
+    <div class="summaryInfo">
+      <p>{{cart.amountTotal}} Artikel</p>
+      <p> CHF {{cart.priceTotal / 100}}.00</p>
+    </div>
+    <div class="button" (click)="closeCartEdit()">
+      <span>Zurück</span>
+    </div>
+  </div>
+</div>

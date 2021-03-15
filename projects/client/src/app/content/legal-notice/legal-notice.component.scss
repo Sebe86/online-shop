@@ -1,0 +1,67 @@
+
+@media (min-device-aspect-ratio: 6/5) {
+  .container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .content {
+    width: 62vw;
+    padding: 2vw;
+    display: grid;
+    grid-row-gap: 3vw;
+    border: .01vw solid #b7b7b7;
+  }
+
+  h1 {
+    margin: 0 0 1vw 0;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.6vw;
+  }
+
+
+  h2 {
+    margin: 0 0 1vw 0;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.2vw;
+  }
+
+  p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1vw;
+  }
+}
+
+@media (max-device-aspect-ratio: 6/5) {
+  .container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .content {
+    width: 92vw;
+    padding: 0 4vw;
+    display: grid;
+    grid-row-gap: 6vw;
+  }
+
+  h1 {
+    margin: 0 0 1vw 0;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 6vw;
+  }
+
+
+  h2 {
+    margin: 0 0 1vw 0;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 4vw;
+  }
+
+  p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 4vw;
+  }
+}

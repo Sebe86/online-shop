@@ -1,0 +1,82 @@
+
+////// portrait mode //////
+@media (max-device-aspect-ratio: 6/5) {
+  .content {
+    display: grid;
+    grid-row-gap: 10vw;
+  }
+
+  .contentBlock {
+    display: grid;
+    grid-row-gap: 10vw;
+
+    #top {
+      margin-top: 0;
+    }
+
+    & .text {
+      display: block;
+      min-height: 60vw;
+      padding: 0 4vw;
+      grid-row: 1 / 2;
+
+      & h3 {
+        font-size: 8vw;
+      }
+
+      & p {
+        font-size: 5vw;
+      }
+    }
+  }
+
+  .button {
+    height: 12vw;
+    margin-top: 8vw;
+
+    & span {
+      font-size: 5vw;
+    }
+  }
+}
+
+
+////// landscape mode //////
+@media (min-device-aspect-ratio: 6/5) {
+  .content {
+    display: grid;
+    width: 62vw;
+    grid-row-gap: 2vw;
+  }
+
+  .contentBlock {
+    display: grid;
+    width: 62vw;
+    grid-column-gap: 2vw;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .text {
+    display: block;
+    padding: 3vw;
+
+    & h3 {
+      font-size: 2vw;
+    }
+
+    & p {
+      font-size: 1.4vw;
+    }
+  }
+
+  .button {
+    height: 4vw;
+    margin-top: 3vw;
+
+    & span {
+      font-size: 1.4vw;
+    }
+  }
+}
+
+
