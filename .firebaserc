@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "vsclothingshop": {
+      "hosting": {
+        "client": [
+          "vsclothingshop"
+        ]
+      }
+    }
+  }
+}

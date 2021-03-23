@@ -1,8 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-  --accent-color-light: #e0e0e0;
-  --accent-color-dark: #b7b7b7;
-  --icon-color: #666666;
+  --accent-color-light: #051d39;
+  --accent-color-dark: #051d39;
+  --accent-color: #051d39;
+  --icon-color: #ffffff;
   --background-color: #ffffff;
 
   --text-color: #000000;
@@ -54,8 +55,8 @@ svg path {
   display: grid;
   justify-items: center;
   align-items: center;
-  background-color: var(--accent-color-light);
-  border: .01vw solid var(--accent-color-dark);
+  border-radius: 15px;
+  background-color: var(--accent-color);
 }
 
 .errorTextColor {
@@ -65,7 +66,7 @@ svg path {
 ////// portrait mode //////
 @media (max-device-aspect-ratio: 6/5) {
   input {
-    border: .01vw solid var(--accent-color-dark);
+    border: .01vw solid var(--accent-color);
     font-size: 4vw;
     padding: 3vw 2vw;
   }
@@ -74,23 +75,23 @@ svg path {
 ////// landscape mode //////
 @media (min-device-aspect-ratio: 6/5) {
   input {
-    border: .01vw solid var(--accent-color-dark);
+    border: .01vw solid var(--accent-color);
     font-size: 1.5vw;
     padding: 1vw 2vw;
 
     &:focus {
-      border: .1vw solid var(--accent-color-dark);
+      border: .1vw solid var(--accent-color);
       padding: .9vw 1.9vw;
     }
   }
 
   .button {
     &:hover {
-      background-color: var(--accent-color-dark);
+      background-color: var(--accent-color);
     }
 
     &:active {
-      background-color: var(--accent-color-light);
+      background-color: var(--accent-color);
     };
   }
 }
